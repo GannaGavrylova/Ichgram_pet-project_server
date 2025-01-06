@@ -6,27 +6,31 @@ import "dotenv/config";
 const jwtSecret = process.env.SECRET_KEY || "lol";
 
 async function login(req, res) {
-  const { email, password } = req.body;
+  const { usernameOrEmail, password } = req.body;
 
-  if (!email || !password) {
+  if (!usernameOrEmail || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
+
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      console.log("Login not successfully");
+      res.status(401).json({ message: "Invalid username or password" });
     }
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid username or password" });
     }
 
     const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: "1h" });
 
-    res.status(200).json({ token });
+    res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("Error: ", error);
-    res.status(500).json({ error: "Internal server error Login" });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 

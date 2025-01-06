@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import User from "../../models/user.js";
 
 async function getUserById(req, res, next) {
   const id = req.params.id;
@@ -7,7 +7,7 @@ async function getUserById(req, res, next) {
     return res.status(400).json({ message: "User ID is required" });
   }
   try {
-    const user = await User.findById(id).select("-password").populate("posts");
+    const user = await User.findById(id).select("-password");
 
     if (!user) {
       return res.status(400).json({ message: "User is not found" });
