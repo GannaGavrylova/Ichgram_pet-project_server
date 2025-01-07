@@ -4,6 +4,7 @@ import login from "../controllers/auth/login.js";
 
 const router = Router();
 
+router.get("/check-username/:username", register);
 router.post("/register", register);
 router.post("/login", login);
 
