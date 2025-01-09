@@ -19,13 +19,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  profile: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
+  bio: { type: String, default: "" },
+  profileImage: { type: String, default: "" },
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
     },
   ],
+  followers_count: { type: Number, default: 0 },
+  following_count: { type: Number, default: 0 },
+  post_count: { type: Number, default: 0 },
+  created_at: { type: Date, default: Date.now },
 });
 
 const User = mongoose.model("User", userSchema);
