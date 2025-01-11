@@ -18,21 +18,21 @@ async function login(req, res) {
 
     if (!user) {
       console.log("Login not successfully");
-      res.status(401).json({ message: "Invalid username or password" });
+      return res.status(401).json({ message: "Invalid username or password" });
     }
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res.status(400).json({ message: "Invalid username or password" });
     }
 
-    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: "12h" });
 
-    res
+    return res
       .status(200)
       .json({ message: "Login successful", token, username: user.username });
   } catch (error) {
     console.error("Error: ", error);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
 
