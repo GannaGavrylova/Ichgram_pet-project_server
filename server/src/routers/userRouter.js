@@ -1,7 +1,7 @@
 import { Router } from "express";
 import authenticateJWT from "../middlewares/authMiddleware.js";
 import getUserById from "../controllers/user/getById.js";
-import getUserPost from "../controllers/posts/getUserPost.js";
+import getUsersPosts from "../controllers/posts/getUsersPosts.js";
 import {
   updeteUserProfile,
   getAllUsers,
@@ -12,6 +12,6 @@ const router = Router();
 router.get("/home", getAllUsers);
 router.get("/:id", authenticateJWT, getUserById);
 router.put("/:id/profile", authenticateJWT, updeteUserProfile);
-router.get("/:id/posts", getUserPost);
+router.get("/posts", getUsersPosts);
 
 export default router;

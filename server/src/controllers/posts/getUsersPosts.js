@@ -1,6 +1,6 @@
 import Post from "../../models/post.js";
 
-const getUserPost = async (req, res) => {
+const getUsersPosts = async (req, res) => {
   try {
     const userId = req.user ? req.user.id : req.params.id;
 
@@ -16,4 +16,4 @@ const getUserPost = async (req, res) => {
   }
 };
 
-export default getUserPost;
+export default getUsersPosts;

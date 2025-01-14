@@ -14,7 +14,6 @@ const authenticateJWT = (req, res, next) => {
       return res.status(403).json({ message: "Invalid token" });
     }
     req.user = data;
-    console.log("Authenticated user:", data);
     next();
   });
 };
