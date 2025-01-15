@@ -8,7 +8,7 @@ export const createPost = async (req, res) => {
 
   try {
     const user = await User.findById(userId);
-    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "Error user is not found" });
     }
@@ -34,7 +34,6 @@ export const createPost = async (req, res) => {
 export const getUserPosts = async (req, res) => {
   try {
     const posts = await Post.find({ user_id: req.user.id });
-    console.log(posts);
     res.status(200).json({ status: "ok", data: posts });
   } catch (error) {
     res.status(500).json({ error: "Error when fetching posts" });
