@@ -8,6 +8,13 @@ const postSchema = new mongoose.Schema({
   },
   images: [{ type: String, required: true }],
   caption: { type: String, default: "" },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Like",
+      required: true,
+    },
+  ],
   likes_count: { type: Number, default: 0 },
   comments_count: { type: Number, default: 0 },
   comments: [
@@ -17,6 +24,7 @@ const postSchema = new mongoose.Schema({
       required: true,
     },
   ],
+
   created_at: { type: Date, default: Date.now },
 });
 
