@@ -7,6 +7,7 @@ import seachRouter from "./routers/searchRouter.js";
 import postRouter from "./routers/postRouter.js";
 import commentRouter from "./routers/commentRouter.js";
 import likeRouter from "./routers/likeRouter.js";
+import followRouter from "./routers/followRouter.js";
 import cors from "cors";
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/search", seachRouter);
 app.use("/post", postRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/likes", likeRouter);
+app.use("/api/follow", followRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: http://localhost:${PORT}`);
