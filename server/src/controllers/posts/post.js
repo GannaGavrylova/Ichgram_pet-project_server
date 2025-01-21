@@ -12,10 +12,16 @@ export const createPost = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Error user is not found" });
     }
+    if (!req.file) {
+      return res.status(400).json({ error: "Image is not provided." });
+    }
+
+    const imageBuffer = req.file.buffer;
+    const imageBase64 = imageBuffer.toString("base64");
 
     const post = new Post({
       user_id: userId,
-      images: ["fileNumber1"],
+      images: [`data:image/jpeg;base64,${imageBase64}`],
       caption,
       creates_at: new Date(),
     });
@@ -35,6 +41,7 @@ export const getUserPosts = async (req, res) => {
   try {
     const posts = await Post.find({ user_id: req.user.id });
     res.status(200).json({ status: "ok", data: posts });
+    сonsole.log("UserPost", posts);
   } catch (error) {
     res.status(500).json({ error: "Error when fetching posts" });
   }

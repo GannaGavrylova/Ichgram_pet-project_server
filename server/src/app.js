@@ -34,6 +34,7 @@ app.use("/post", postRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/likes", likeRouter);
 app.use("/api/follow", followRouter);
+// app.use("/api/notification");
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: http://localhost:${PORT}`);
