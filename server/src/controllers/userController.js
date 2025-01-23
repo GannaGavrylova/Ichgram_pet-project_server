@@ -51,8 +51,8 @@ export const updeteUserProfile = async (req, res) => {
     // если файл загружен обрабатываем его
 
     if (req.file) {
-      console.log("req.file: ", req.file);
-      console.log("req.body: ", req.body);
+      // console.log("req.file: ", req.file);
+      // console.log("req.body: ", req.body);
       const base64Image = `data:${
         req.file.mimetype
       };base64,${req.file.buffer.toString("base64")}`;
