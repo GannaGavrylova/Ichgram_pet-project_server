@@ -53,7 +53,7 @@ export const followUserPost = async (req, res) => {
       follower_user_id: userId,
       followed_user_id: target_user_id,
     });
-
+    console.log(existingFollow);
     if (existingFollow) {
       return res
         .status(400)
